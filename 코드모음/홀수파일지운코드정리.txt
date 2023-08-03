@@ -1,0 +1,10 @@
+<파일 홀수 지우기>
+
+- Windows PowerShell 열기 
+	경로 지정 
+		- PS C:\Users\user> D:
+		- PS D:\___project3\113.태풍 및 홍수로 인한 피해 및 위험 데이터> cd '01.데이터\1.Training\원천데이터\TS\01\01\01'
+	jpg파일 지우기
+		-  Get-ChildItem -Filter "*.jpg" | Where-Object { $_.BaseName -match ".*[13579]$" } | Remove-Item -Force
+	joson파일 지우기
+		- Get-ChildItem -Filter "*.json" | Where-Object { $_.BaseName -match ".*[13579]$" } | Remove-Item -Force
