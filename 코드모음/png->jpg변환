@@ -1,0 +1,31 @@
+# png-> jpg로 바꾸기
+
+!pip install Pillow
+
+from PIL import Image
+import os
+
+def convert_folder_images(input_folder, output_folder):
+    try:
+        if not os.path.exists(output_folder):
+            os.makedirs(output_folder)
+
+        for filename in os.listdir(input_folder):
+            if filename.endswith('.png'):
+                input_path = os.path.join(input_folder, filename)
+                output_path = os.path.join(output_folder, filename.replace('.png', '.jpg'))
+
+                img = Image.open(input_path)
+                if img.mode != 'RGB':
+                    img = img.convert('RGB')
+                img.save(output_path, 'JPEG', quality=85)
+
+                print(f"{input_path}을(를) {output_path}로 변환 완료")
+    except Exception as e:
+        print(f"오류 발생: {e}")
+
+# 변환할 폴더 경로와 출력 폴더 경로 설정
+input_folder = '/content/carimage/train/'    # 변환할 .png 파일들이 있는 폴더의 경로
+output_folder = '/content/carimage/train_jpg/'  # 변환된 .jpg 파일들을 저장할 폴더의 경로
+
+convert_folder_images(input_folder, output_folder)
